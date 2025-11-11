@@ -1,0 +1,261 @@
+<!doctype html>
+{%load static%}
+<html lang="en">
+<head>
+    <title>trackbot </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="{%static 'fonts/icomoon/style.css'%}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{%static 'css/jquery-ui.css'%}">
+    <link rel="stylesheet" href="{%static 'css/owl.carousel.min.css'%}">
+    <link rel="stylesheet" href="{%static 'css/owl.theme.default.min.css'%}">
+    <link rel="stylesheet" href="{%static 'css/owl.theme.default.min.css'%}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+    <link rel="stylesheet" href="{%static 'css/jquery.fancybox.min.css'%}">
+
+    <link rel="stylesheet" href="{%static 'css/bootstrap-datepicker.css'%}">
+
+    <link rel="stylesheet" href="{%static 'fonts/flaticon/font/flaticon.css'%}">
+
+    <link rel="stylesheet" href="{%static 'css/aos.css'%}">
+
+    <link rel="stylesheet" href="{%static 'css/style.css'%}">
+
+  </head>
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+  
+
+  <div id="overlayer"></div>
+  <div class="loader">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+
+
+  <div class="site-wrap">
+
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+   
+    
+    <header class="site-navbar js-sticky-header site-navbar-target" role="banner" style="background:gray;">
+
+      <div class="container">
+        <div class="row align-items-center">
+          
+          <div class="col-6 col-xl-2">
+            <h1 class="mb-0 site-logo"><a href="index.html" class="h2 mb-0">TRACKBOT<span class="text-primary"></span> </a></h1>
+          </div>
+
+          <div class="col-12 col-md-10 d-none d-xl-block">
+            <nav class="site-navigation position-relative text-right" role="navigation">
+
+              <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                <li><a href="/home" class="nav-link">Home</a></li>
+                  <li><a href="AddExpenses" class="nav-link">Add Expenses</a></li>
+                <li><a href="/Upload" class="nav-link">Upload Dataset</a></li>
+                <li><a href="ViewDataset" class="nav-link">Summery</a></li>
+
+
+                 <li class="has-children">
+                  <a href="#" class="nav-link">Reports Page</a>
+                  <ul class="dropdown">
+                      <li><a href="expense_chart" class="nav-link">expense_chart</a></li>
+                    <li><a href="monthly" class="nav-link">monthly_spending_trends</a></li>
+                    <li><a href="monthly_income" class="nav-link">Monthly Income vs Expenses</a></li>
+                    <li><a href="Cumulative" class="nav-link">Cumulative Account Balance Over Time</a></li>
+                  </ul>
+                </li>
+                <li><a href="Chatbot" class="nav-link">ChatBot</a></li>
+                  <li><a href="Predict_Expenses" class="nav-link">Predict Expenses</a></li>
+                 <li><a href="/" class="nav-link">Logout</a></li>
+                   </ul>
+
+            </nav>
+          </div>
+
+
+          <div class="col-6 d-inline-block d-xl-none ml-md-0 py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle float-right"><span class="icon-menu h3"></span></a></div>
+
+        </div>
+      </div>
+      
+    </header>
+
+  
+
+<!--    <div class="site-blocks-cover overlay" style="background-image: url({%static 'images/hero_2.jpg'%});" data-aos="fade" id="home-section">-->
+
+<!--    </div>-->
+
+
+    <div class="site-section cta-big-image" id="about-section">
+      <div class="container">
+        <div class="row mb-5 justify-content-center">
+          <div class="col-md-8 text-center">
+            <h2 class="section-title mb-3" data-aos="fade-up" data-aos-delay="">Welcome to Add Expenses/Income Page</h2>
+            <p class="lead" data-aos="fade-up" data-aos-delay="100">
+            TRACKBOT is a personal finance manager powered by AI.
+              </p>
+          </div>
+        </div>
+
+  <section class="site-section bg-light" id="contact-section" data-aos="fade">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-md-12 mb-5">
+
+             <font color="red">{{msg}}</font>
+
+            <form action="/AddEIAction" class="p-5 bg-white" method="post">
+              {%csrf_token%}
+
+              <h2 class="h4 text-black mb-5">Add Expenses/Income</h2>
+
+              <div class="row form-group">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">User ID</label>
+                  <input type="number" id="fname" name="user_id" class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label class="text-black" for="lname">Date</label>
+                  <input type="date" id="lname" name="date" class="form-control">
+                </div>
+              </div>
+
+             <div class="row form-group">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Category</label>
+                  <select id="cate" name="category" class="form-control" required>
+                    <option value=""></option>
+                    {{s1|safe}}
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="text-black" for="lname">Description</label>
+                  <input type="subject" id="desc" name="desc" class="form-control">
+                </div>
+              </div>
+
+               <div class="row form-group">
+                 <div class="col-md-6">
+                  <label class="text-black" for="lname">Amount</label>
+                  <input type="amount" id="am" name="amount" class="form-control">
+                </div>
+
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Type</label>
+                  <select id="text" name="type" class="form-control" required>
+                    <option value=""></option>
+                    {{s2|safe}}
+                  </select>
+                </div>
+              </div>
+
+               <div class="row form-group">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Balance</label>
+                  <input type="amount" id="b" name="balance" class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label class="text-black" for="lname">Merchant</label>
+                  <input type="text" id="m" name="merchant" class="form-control">
+                </div>
+              </div>
+
+              <div class="row form-group">
+                 <div class="col-md-6">
+                  <label class="text-black" for="lname">Payment Method</label>
+                  <select id="pm" name="p_m" class="form-control" required>
+                    <option value=""></option>
+                    {{s3|safe}}
+                  </select>
+                </div>
+
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Budget Category</label>
+                  <select id="bc" name="b_c" class="form-control" required>
+                    <option value=""></option>
+                    {{s4|safe}}
+                  </select>
+                </div>
+              </div>
+
+              <div class="row form-group">
+
+                <div class="col-md-12">
+                  <label class="text-black" for="subject">Note</label>
+                  <input type="subject" id="subject" name="note" class="form-control">
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <input type="submit" value="Add Details" class="btn btn-primary btn-md text-white">
+                </div>
+              </div>
+
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+
+    
+    <footer class="site-footer">
+      <div class="container">
+
+        <div class="row pt-5 mt-5 text-center">
+          <div class="col-md-12">
+            <div class="border-top pt-5">
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              <p>Copyright &copy;
+               TRACKBOT
+A personal finance manager Using AI
+              </p>
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </footer>
+
+  </div> <!-- .site-wrap -->
+
+  <script src="{%static 'js/jquery-3.3.1.min.js'%}"></script>
+  <script src="{%static 'js/jquery-ui.js'%}"></script>
+  <script src="{%static 'js/popper.min.js'%}"></script>
+  <script src="{%static 'js/bootstrap.min.js'%}"></script>
+  <script src="{%static 'js/owl.carousel.min.js'%}"></script>
+  <script src="{%static 'js/jquery.countdown.min.js'%}"></script>
+  <script src="{%static 'js/jquery.easing.1.3.js'%}"></script>
+  <script src="{%static 'js/aos.js'%}"></script>
+  <script src="{%static 'js/jquery.fancybox.min.js'%}"></script>
+  <script src="{%static 'js/jquery.sticky.js'%}"></script>
+  <script src="{%static 'js/isotope.pkgd.min.js'%}"></script>
+
+  
+  <script src="{%static 'js/main.js'%}"></script>
+
+  
+  </body>
+</html>
